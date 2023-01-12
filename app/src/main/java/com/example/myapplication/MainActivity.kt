@@ -1,8 +1,12 @@
 package com.example.myapplication
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 
@@ -11,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val button =findViewById<Button>(R.id.button)
+        val button2 =findViewById<Button>(R.id.button2)
         button.setOnClickListener {
             val builder = AlertDialog.Builder(this)
 
@@ -32,5 +37,27 @@ class MainActivity : AppCompatActivity() {
             alertDialog.show()
 
         }
+        var color = arrayOf(
+            "azul", "rosa", "gris"
+        )
+        val customDialog=AlertDialog.Builder(this)
+        customDialog.setTitle("Dialogo")
+        customDialog.setItems(color,DialogInterface.OnClickListener{
+            _,which ->
+            when(which){
+                0->{
+                    Toast.makeText(this, "Azul", Toast.LENGTH_LONG).show()
+                }
+                1 ->{
+                    Toast.makeText(this, "Rosa", Toast.LENGTH_LONG).show()
+                }
+                2->{
+                    Toast.makeText(this, "gris", Toast.LENGTH_LONG).show()
+                }
+            }
+        })
+        val alertDialog=customDialog.create()
+        alertDialog.setCancelable(false)
+        alertDialog.show()
     }
 }
